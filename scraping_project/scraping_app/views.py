@@ -21,7 +21,6 @@ class SearchList(generics.ListCreateAPIView):
         self.perform_search()
 
     def load_keywords_and_websites(self):
-        """Load keywords and websites from CSV files."""
         keywords_file_path = os.path.join(
             self.current_directory, 'keywords.csv')
         websites_file_path = os.path.join(
@@ -39,7 +38,6 @@ class SearchList(generics.ListCreateAPIView):
             self.websites = [row[0] for row in websites_reader]
 
     def perform_search(self):
-        """Perform search for keywords on websites."""
         for keyword in self.keywords:
             for website_url in self.websites:
                 search_result = self.scrape_and_check_keyword(
@@ -49,7 +47,6 @@ class SearchList(generics.ListCreateAPIView):
         self.save_results_to_csv()
 
     def scrape_and_check_keyword(self, website_url, keyword):
-        """Scrape website content and check if keyword is present."""
         try:
             response = requests.get(website_url)
             response.raise_for_status()
@@ -78,7 +75,6 @@ class SearchList(generics.ListCreateAPIView):
             }
 
     def save_results_to_csv(self):
-        """Save search results to a CSV file."""
         output_file_path = os.path.join(
             self.current_directory, 'search_results.csv')
 
