@@ -1,4 +1,4 @@
-from rest_framework import generics, status
+from rest_framework import generics
 from rest_framework.response import Response
 from .models import Search
 from .serializers import SearchSerializer
@@ -14,34 +14,34 @@ class SearchList(generics.ListCreateAPIView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Get the current directory path
         self.current_directory = os.path.dirname(__file__)
+        self.search_results = []
 
+        self.load_keywords_and_websites()
+        self.perform_search()
+
+    def load_keywords_and_websites(self):
+        """Load keywords and websites from CSV files."""
         keywords_file_path = os.path.join(
             self.current_directory, 'keywords.csv')
         websites_file_path = os.path.join(
             self.current_directory, 'websites.csv')
 
-        keywords = []
+        self.keywords = []
         with open(keywords_file_path, 'r') as keywords_file:
             keywords_reader = csv.reader(keywords_file)
             next(keywords_reader)  # Skip header row
-            for row in keywords_reader:
-                keyword = row[0]
-                keywords.append(keyword)
+            self.keywords = [row[0] for row in keywords_reader]
 
-        websites = []
         with open(websites_file_path, 'r') as websites_file:
             websites_reader = csv.reader(websites_file)
             next(websites_reader)  # Skip header row
-            for row in websites_reader:
-                website = row[0]
-                websites.append(website)
+            self.websites = [row[0] for row in websites_reader]
 
-        self.search_results = []
-
-        for keyword in keywords:
-            for website_url in websites:
+    def perform_search(self):
+        """Perform search for keywords on websites."""
+        for keyword in self.keywords:
+            for website_url in self.websites:
                 search_result = self.scrape_and_check_keyword(
                     website_url, keyword)
                 self.search_results.append(search_result)
@@ -49,19 +49,19 @@ class SearchList(generics.ListCreateAPIView):
         self.save_results_to_csv()
 
     def scrape_and_check_keyword(self, website_url, keyword):
+        """Scrape website content and check if keyword is present."""
         try:
             response = requests.get(website_url)
             response.raise_for_status()
 
             soup = BeautifulSoup(response.text, 'html.parser')
-
             relevant_elements = soup.find_all(
                 ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 
             keyword_found = any(keyword in element.get_text()
                                 for element in relevant_elements)
-            relative_info = "\n".join([element.get_text()
-                                       for element in relevant_elements if keyword in element.get_text()])
+            relative_info = "\n".join(
+                [element.get_text() for element in relevant_elements if keyword in element.get_text()])
 
             return {
                 'website_url': website_url,
@@ -69,8 +69,7 @@ class SearchList(generics.ListCreateAPIView):
                 'keyword_found': keyword_found,
                 'relative_info': relative_info,
             }
-        except requests.exceptions.RequestException as e:
-            # Handle connection or request errors
+        except requests.exceptions.RequestException:
             return {
                 'website_url': website_url,
                 'keyword': keyword,
@@ -79,6 +78,7 @@ class SearchList(generics.ListCreateAPIView):
             }
 
     def save_results_to_csv(self):
+        """Save search results to a CSV file."""
         output_file_path = os.path.join(
             self.current_directory, 'search_results.csv')
 
