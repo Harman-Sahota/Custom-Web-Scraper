@@ -70,9 +70,9 @@ To run the unit tests for the Custom Web Scraper project, follow these steps:
 1. Make sure you are in the project directory containing the manage.py script.
 2. Open a terminal or command prompt.
 3. Run the following command to execute the tests:
-
+```bash
    python manage.py test
-
+```
 4. The tests will run, and the results will be displayed in the terminal.
 5. Observe the test results. If all tests pass, you should see OK. If there are failures or errors, detailed information will be provided.
 
