@@ -1,0 +1,95 @@
+website_url,keyword,keyword_found,relative_info
+https://www.djangoproject.com/,Django,True,"Django
+
+Django makes it easier to build better web apps more quickly and with less code.
+
+
+Get started with Django
+
+Meet Django
+
+      Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+      Built by experienced developers, it takes care of much of the hassle of web development, so you can focus
+      on writing your app without needing to reinvent the wheel. It’s free and open source.
+    
+Django was designed to help developers take applications from concept to completion as quickly as possible.
+Django takes security seriously and helps developers avoid many common security mistakes.
+Some of the busiest sites on the web leverage Django’s ability to quickly and flexibly scale.
+Subscribe to one of our mailing lists to stay up to date with everything in the Django community:
+Using Django
+Get help with Django and follow announcements.
+Contributing to Django
+Contribute to the development of Django itself.
+
+      Before asking a question about how to contribute, read
+      
+        Contributing to Django. Many frequently asked questions are answered there.
+    
+Support Django!
+
+Django bugfix release: 4.2.4
+
+Today the Django project issued a bugfix release for the 4.2 release series.
+The Django Software Foundation’s biggest fundraising event of the year is here!
+New to Django?
+The power of Django
+The Django Software Foundation
+Django Links
+© 2005-2023
+         Django Software
+          Foundation and individual contributors. Django is a
+        registered
+          trademark of the Django Software Foundation.
+      "
+https://en.wikipedia.org/wiki/Web_scraping,Django,False,
+https://www.python.org/,Django,False,
+https://www.example.com/,Django,False,
+https://www.djangoproject.com/,Web scraping,False,
+https://en.wikipedia.org/wiki/Web_scraping,Web scraping,True,"Web scraping
+Web scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites.[1] Web scraping software may directly access the World Wide Web using the Hypertext Transfer Protocol or a web browser. While web scraping can be done manually by a software user, the term typically refers to automated processes implemented using a bot or web crawler. It is a form of copying in which specific data is gathered and copied from the web, typically into a central local database or spreadsheet, for later retrieval or analysis.
+
+Web scraping is the process of automatically mining data or collecting information from the World Wide Web. It is a field with active developments sharing a common goal with the semantic web vision, an ambitious initiative that still requires breakthroughs in text processing, semantic understanding, artificial intelligence and human-computer interactions.
+"
+https://www.python.org/,Web scraping,False,
+https://www.example.com/,Web scraping,False,
+https://www.djangoproject.com/,Python,True,"
+      Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+      Built by experienced developers, it takes care of much of the hassle of web development, so you can focus
+      on writing your app without needing to reinvent the wheel. It’s free and open source.
+    "
+https://en.wikipedia.org/wiki/Web_scraping,Python,True,"A simple yet powerful approach to extract information from web pages can be based on the UNIX grep command or regular expression-matching facilities of programming languages (for instance Perl or Python).
+"
+https://www.python.org/,Python,True,"The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions in Python 3
+Lists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists in Python 3
+Calculations are simple with Python, and expression syntax is straightforward: the operators +, -, * and / work as expected; parentheses () can be used for grouping. More about simple math functions in Python 3.
+Python knows the usual control flow statements that other languages speak — if, for, while and range — with some of its own twists, of course. More control flow tools in Python 3
+Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your appetite with our Python 3 overview.
+Python is a programming language that lets you work quickly and integrate systems more effectively. Learn More
+Whether you're new to programming or an experienced developer, it's easy to learn and use Python.
+Python source code and installers are available for download for all versions!
+Latest: Python 3.11.4
+Documentation for Python's standard library, along with tutorials and guides, are available online.
+Looking for work or have a Python related position that you're trying to hire for? Our relaunched community-run job board is the place to go.
+Using Python scripts to analyse SEO and broken links on your site by Marnix de Munck
+Use Python for…
+
+>>> Python Enhancement Proposals (PEPs): The future of Python is discussed here.
+ RSS
+
+
+>>> Python Software Foundation
+
+The mission of the Python Software Foundation is to promote, protect, and advance the Python programming language, and to support and facilitate the growth of a diverse and international community of Python programmers. Learn more 
+
+Copyright ©2001-2023.
+                             Python Software Foundation
+                             Legal Statements
+                             Privacy Policy
+
+"
+https://www.example.com/,Python,False,
+https://www.djangoproject.com/,API,False,
+https://en.wikipedia.org/wiki/Web_scraping,API,True,"There are many software tools available that can be used to customize web-scraping solutions. This software may attempt to automatically recognize the data structure of a page or provide a recording interface that removes the necessity to manually write web-scraping code, or some scripting functions that can be used to extract and transform content, and database interfaces that can store the scraped data in local databases. Some web scraping software can also be used to extract data from an API directly.
+"
+https://www.python.org/,API,False,
+https://www.example.com/,API,False,
