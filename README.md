@@ -1,4 +1,4 @@
-# Custom Web Scraper Application
+#  Web Scraper Application
 
 ## Overview
 
