@@ -1,4 +1,33 @@
 body {
-    background-color: #061C37;
-    color: white;
+    background-color: #061C37 !important;
+    color: white !important;
+    font-family: 'Cabin', sans-serif;
+
+}
+
+.landing-nav {
+    padding: 1.5em !important;
+}
+
+.landing-brand {
+    color: white !important;
+}
+
+.landing-ul {
+    color: white !important;
+}
+
+.landing-ul:hover {
+    color: #7DB8FF !important;
+    transition: 0.3s ease;
+}
+
+.btn-landing {
+    color: white !important;
+    margin-left: 2%;
+}
+
+.btn-landing:hover {
+    background-color: #7DB8FF !important;
+    transition: 0.3s ease;
 }
