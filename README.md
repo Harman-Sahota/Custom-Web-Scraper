@@ -4,6 +4,20 @@
 
 The Custom Web Scraper Application is a Django-based tool designed to perform keyword searches on a predefined list of websites and store the search results in a CSV file. This application serves as a basic web scraping utility that can be extended and customized for various use cases.
 
+
+## Updates and Features
+
+- **Frontend Integration**: The application is currently being enhanced to include a frontend interface. Users will be able to use the application through a functional website, making it more user-friendly and accessible.
+
+- **Scraping by Category**: A new feature is being developed to allow users to perform searches by category. This will enhance search flexibility and accuracy by narrowing down results based on specific categories.
+
+- **SQL Database Integration**: Instead of using CSV files, the application is being upgraded to use an SQL database for storing keywords, websites, and search results. This change will improve data organization and querying capabilities.
+
+- **User Accounts System**: A user account system is in the works, requiring users to log in before using the website. This will enhance security and provide personalized experiences for users.
+
+- **API Check and Integration**: An intelligent feature is being added to check if a website has a data sharing API before performing scraping. If an API is available, the application will utilize it to retrieve data, reducing the need for scraping and potentially improving data accuracy.
+
+
 ## Setup and Usage
 
 ### Installation
