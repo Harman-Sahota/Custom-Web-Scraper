@@ -27,7 +27,41 @@ body {
     margin-left: 2%;
 }
 
-.btn-landing:hover {
-    background-color: #7DB8FF !important;
-    transition: 0.3s ease;
+.container-landing {
+    text-align: left;
+    height: 50vh !important;
+    width: 80vh;
+    margin-left: 5%;
+    margin-top: 7%;
+    padding: 1em;
+}
+
+.h1-landing {
+    width: 100%;
+    padding: 0.5em;
+    height: auto;
+}
+
+.h5-landing {
+    padding: 0.5em;
+    margin-top: 5%;
+    opacity: 0.7 !important;
+    height: auto;
+    width: 100%;
+    margin-left: 2%;
+}
+
+.btn-landing-action {
+    color: white !important;
+    margin-top: 3%;
+    margin-left: 4%;
+}
+
+.img-landing {
+    float: right;
+    width: 20%;
+    margin-top: -27%;
+    margin-right: 10%;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px 0px #7DB8FF;
 }
