@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
+from django.shortcuts import render
 
 
 class SearchList(generics.ListCreateAPIView):
@@ -85,3 +86,7 @@ class SearchList(generics.ListCreateAPIView):
 
             writer.writeheader()
             writer.writerows(self.search_results)
+
+
+def landing_page(request):
+    return render(request, 'scraping_app/home.html')
