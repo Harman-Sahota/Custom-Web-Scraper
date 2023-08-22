@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Website</title>
+    <!-- Include Axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h2>Create Website</h2>
+    <form id="websiteForm">
+        {% csrf_token %}
+        <label for="url">Website URL:</label>
+        <input type="url" id="url" name="url" required><br><br> <!-- Use type="url" for URL validation -->
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="Category 1">Category 1</option>
+            <option value="Category 2">Category 2</option>
+            <!-- Add more options as needed -->
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Add event listener to form submit
+        document.getElementById('websiteForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Check if the form is valid
+            if (!event.target.checkValidity()) {
+                // If the form is invalid, display validation messages
+                event.target.reportValidity();
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                website_url: document.getElementById('url').value,
+                category: document.getElementById('category').value
+            };
+
+            // Send POST request using Axios
+            axios.post('/api/create-website/', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log(response.data); // Response from the server
+                    // Add your success handling here
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Add your error handling here
+                });
+        });
+    </script>
+</body>
+
+</html>

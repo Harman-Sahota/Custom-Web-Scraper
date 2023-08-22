@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.response import Response
 from .models import WebsiteList
@@ -5,8 +6,10 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
+from .serializers import WebsiteListSerializer
 from django.shortcuts import render
-
+from rest_framework.decorators import api_view
+from rest_framework import status
 
 # class SearchList(generics.ListCreateAPIView):
 #     queryset = Search.objects.all()
@@ -93,3 +96,19 @@ def landing_page(request):
 
 def scrape(request):
     return render(request, 'scraping_app/scrape.html')
+
+
+@csrf_exempt
+@api_view(['POST'])
+def create_website(request):
+    if request.method == 'POST':
+        serializer = WebsiteListSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()  # Save the data to the database
+            response_data = {'message': 'Website created successfully'}
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    response_data = {'error': 'Invalid request method'}
+    return Response(response_data, status=status.HTTP_405_METHOD_NOT_ALLOWED)
