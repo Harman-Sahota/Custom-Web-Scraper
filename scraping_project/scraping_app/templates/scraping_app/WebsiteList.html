@@ -29,7 +29,7 @@
         </div>
     </nav>
     <div class="container container-fluid container-websitelist">
-        <h2>Create Website</h2>
+        <h2>Add Website</h2>
         <form id="websiteForm" class="needs-validation" novalidate>
             {% csrf_token %}
             <div class="mb-3">
@@ -43,8 +43,9 @@
             <div class="mb-3">
                 <label for="category" class="form-label">Category:</label>
                 <select class="form-select" id="category" name="category" required>
-                    <option value="Category 1">Category 1</option>
-                    <option value="Category 2">Category 2</option>
+                    <option value="All">All</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Health">Health</option>
                     <!-- Add more options as needed -->
                 </select>
                 <div class="invalid-feedback">
