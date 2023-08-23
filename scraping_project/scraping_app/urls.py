@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import landing_page, scrape, create_website
+from .views import landing_page, WebsiteList, create_website
 
 urlpatterns = [
     path('', landing_page, name='landing_page'),
-    path('scrape/', scrape, name='scrape'),
+    path('WebsiteList/', WebsiteList, name='WebsiteList'),
     path('api/create-website/', create_website,
          name='api_create_website'),
 ]

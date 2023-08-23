@@ -94,8 +94,8 @@ def landing_page(request):
     return render(request, 'scraping_app/home.html')
 
 
-def scrape(request):
-    return render(request, 'scraping_app/scrape.html')
+def WebsiteList(request):
+    return render(request, 'scraping_app/WebsiteList.html')
 
 
 @csrf_exempt
