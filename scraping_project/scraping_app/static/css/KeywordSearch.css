@@ -27,11 +27,56 @@ body {
     margin-left: 2%;
 }
 
-.container-websitelist {
+.container-keywords {
 
     padding: 2em;
     width: 40%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: #3B6D99 !important;
+}
+
+/* Add styles for the results container */
+#results-container {
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #3B6D99 !important;
+}
+
+/* Style for each individual result */
+#results-container div {
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #1a5d98 !important;
+    color: white !important;
+}
+
+/* Style for the horizontal line separator */
+#results-container hr {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Style for the website name in each result */
+#results-container h3 {
+    margin: 0;
+    color: white !important;
+}
+
+/* Style for the website URL in each result */
+#results-container a {
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Style for the scraped data in each result */
+#results-container li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: white !important;
 }
