@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Websites</title>
+    <!-- Include necessary CSS and JS files here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('form').on('submit', function (event) {
+                event.preventDefault();
+
+                const category = $('#category').val();
+                const keyword = $('#keyword').val();
+
+                $.ajax({
+                    url: '/api/website-search/',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    data: {
+                        category: category,
+                        keyword: keyword
+                    },
+                    success: function (response) {
+                        const resultsContainer = $('#results-container');
+                        resultsContainer.empty();
+
+                        response.search_results.forEach(result => {
+                            const resultDiv = $('<div>');
+
+                            // Create a list to display the search result details
+                            const resultList = $('<ul>');
+
+                            // Add website name and URL to the list
+                            resultList.append(`<li><h3>${result.website_name}</h3></li>`);
+                            resultList.append(`<li>Website URL: <a href="${result.website_url}" target="_blank">${result.website_url}</a></li>`);
+
+                            // Check for API data and log it to the console
+                            if (result.api_data) {
+                                console.log('API Data:', result.api_data);
+                                resultList.append(`<li>API Data: ${JSON.stringify(result.api_data)}</li>`);
+                            }
+
+                            // Check for scraped data and add to the list
+                            if (result.scraped_data) {
+                                // Add line breaks to the scraped data
+                                const scrapedDataWithLineBreaks = result.scraped_data.replace(/\n/g, '<br>');
+                                resultList.append(`<li>Scraped Data: ${scrapedDataWithLineBreaks}</li>`);
+                            }
+
+                            // Append the list to the resultDiv
+                            resultDiv.append(resultList);
+
+                            // Add a horizontal line separator
+                            resultDiv.append('<hr>');
+
+                            // Append the resultDiv to the resultsContainer
+                            resultsContainer.append(resultDiv);
+                        });
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Search Websites</h2>
+    <form>
+        {% csrf_token %}
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <!-- Populate options based on your categories -->
+            <option value="Finance">Finance</option>
+            <option value="Health">Health</option>
+        </select>
+        <label for="keyword">Keyword:</label>
+        <input type="text" id="keyword" name="keyword" required>
+        <button type="submit">Search</button>
+    </form>
+    <div id="results-container"></div> <!-- Display search results here -->
+</body>
+
+</html>

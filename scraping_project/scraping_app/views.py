@@ -1,15 +1,13 @@
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import WebsiteList
+from rest_framework import status
 import requests
 from bs4 import BeautifulSoup
-import csv
-import os
+from .models import WebsiteList
 from .serializers import WebsiteListSerializer
 from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework import status
 
 # class SearchList(generics.ListCreateAPIView):
 #     queryset = Search.objects.all()
@@ -94,7 +92,7 @@ def landing_page(request):
     return render(request, 'scraping_app/home.html')
 
 
-def WebsiteList(request):
+def website_list_view(request):
     return render(request, 'scraping_app/WebsiteList.html')
 
 
@@ -112,3 +110,67 @@ def create_website(request):
 
     response_data = {'error': 'Invalid request method'}
     return Response(response_data, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+def KeywordSearch(request):
+    return render(request, 'scraping_app/KeywordSearch.html')
+
+
+@api_view(['POST'])
+def search_websites(request):
+    if request.method == 'POST':
+        category = request.data.get('category')
+        keyword = request.data.get('keyword')
+
+        websites = WebsiteList.objects.filter(category=category)
+        search_results = []
+
+        for website in websites:
+            result = {
+                'website_name': website.website_url,
+                'website_url': website.website_url,
+            }
+
+            if website.has_data_api:  # Assuming 'has_data_api' is a field in your WebsiteList model
+                try:
+                    api_url = website.data_api_url
+                    response = requests.get(api_url)
+                    api_data = response.json()
+                    result['api_data'] = api_data
+                except requests.exceptions.RequestException as api_request_exception:
+                    result['api_error'] = str(api_request_exception)
+            else:
+                try:
+                    scraped_data = scrape_website_content(
+                        website.website_url, keyword)  # Pass keyword to the function
+                    result['scraped_data'] = scraped_data
+                except Exception as e:
+                    result['scrape_error'] = str(e)
+
+            search_results.append(result)
+
+        return Response({'search_results': search_results})
+
+    return Response({'error': 'Invalid request method'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+def scrape_website_content(website_url, keyword):
+    try:
+        response = requests.get(website_url)
+        response.raise_for_status()  # Raise an exception for non-200 status codes
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # Update the CSS selectors to target the relevant elements more accurately
+        # Adjust the selectors as needed
+        matching_elements = soup.select('h1, h2, h3, p')
+
+        scraped_data = ""
+        for element in matching_elements:
+            if keyword.lower() in element.get_text().lower():
+                scraped_data += element.get_text() + "\n"
+
+        return scraped_data.strip()  # Remove leading/trailing whitespace
+    except requests.exceptions.RequestException as request_exception:
+        raise Exception(f"Request error: {str(request_exception)}")
+    except Exception as e:
+        raise Exception(f"Scraping error: {str(e)}")
