@@ -1,3 +1,4 @@
+import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
@@ -131,23 +132,36 @@ def search_websites(request):
                 'website_url': website.website_url,
             }
 
-            if website.has_data_api:  # Assuming 'has_data_api' is a field in your WebsiteList model
-                try:
-                    api_url = website.data_api_url
-                    response = requests.get(api_url)
+            try:
+                response = requests.get(website.website_url)
+                response.raise_for_status()  # Raise an exception for non-200 status codes
+
+                # Check if the response content is in JSON format
+                if 'application/json' in response.headers.get('Content-Type'):
                     api_data = response.json()
-                    result['api_data'] = api_data
-                except requests.exceptions.RequestException as api_request_exception:
-                    result['api_error'] = str(api_request_exception)
-            else:
-                try:
+
+                    # Filter the API data based on the keyword
+                    filtered_data = []
+                    for entry in api_data:
+                        if keyword.lower() in json.dumps(entry).lower():
+                            filtered_data.append(entry)
+
+                    if filtered_data:
+                        result['api_data'] = filtered_data
+                else:
+                    # If not JSON, attempt scraping
                     scraped_data = scrape_website_content(
                         website.website_url, keyword)  # Pass keyword to the function
-                    result['scraped_data'] = scraped_data
-                except Exception as e:
-                    result['scrape_error'] = str(e)
+                    if scraped_data:
+                        result['scraped_data'] = scraped_data
 
-            search_results.append(result)
+            except requests.exceptions.RequestException as request_exception:
+                result['request_error'] = str(request_exception)
+            except Exception as e:
+                result['error'] = str(e)
+
+            if 'api_data' in result or 'scraped_data' in result:
+                search_results.append(result)
 
         return Response({'search_results': search_results})
 
