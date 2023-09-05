@@ -1,4 +1,5 @@
 # Custom Web Scraper Application
+**Last Updated - Sep 5 2023, 5:34 pm EST**
 
 ## Table of Contents
 
@@ -165,6 +166,6 @@ The Custom Web Scraper Application offers a powerful and customizable solution f
 
 Please note that the login feature is mentioned as currently under development in this documentation. You can update this section with details once the feature is fully implemented.
 
-**Last Updated - Sep 5 2023, 5:34 pm EST**
+
 
   
