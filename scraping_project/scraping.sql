@@ -1,3 +1,7 @@
+CREATE DATABASE `ScrapeDB` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE ScrapeDB
+
 CREATE TABLE `WebsiteList` (
 `id` int NOT NULL AUTO_INCREMENT,
 `website_url` varchar(255) NOT NULL,
