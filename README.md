@@ -17,9 +17,8 @@
     - [Keyword Search Page](##Keyword-Search-Page)
     - [Login Feature](##Login-Feature)
 7. [API Endpoints](#API-Endpoints)
-   - [Partial API Integration](##Partial-API-Integration)
 8. [Partial API Integration](#partial-api-integration)
-10. [Conclusion](#conclusion)
+9. [Conclusion](#conclusion)
 
 
 # Overview
