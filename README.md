@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-1. [Overview](#overview)
+1. [Overview](#Overview)
 2. [Installation](#installation)
     - [Python](#python)
     - [Required Packages](#required-packages)
@@ -21,7 +21,7 @@
 9. [Conclusion](#conclusion)
 
 
-# 1. Overview
+# Overview
 
 The **Custom Web Scraper Application** is a versatile web scraping and data extraction tool built on the Django web framework. It empowers users to extract valuable information from websites, categorize results, and perform keyword-based searches with ease. This customizable and user-friendly application serves as a foundation for web scraping projects and provides essential features for data retrieval and analysis.
 
