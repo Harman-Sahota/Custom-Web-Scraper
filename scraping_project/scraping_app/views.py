@@ -133,25 +133,14 @@ def search_websites(request):
             }
 
             try:
-                response = requests.get(website.website_url)
-                response.raise_for_status()  # Raise an exception for non-200 status codes
-
-                # Check if the response content is in JSON format
-                if 'application/json' in response.headers.get('Content-Type'):
-                    api_data = response.json()
-
-                    # Filter the API data based on the keyword
-                    filtered_data = []
-                    for entry in api_data:
-                        if keyword.lower() in json.dumps(entry).lower():
-                            filtered_data.append(entry)
-
-                    if filtered_data:
-                        result['api_data'] = filtered_data
+                # First, attempt to fetch data from the API if it's available
+                api_data = fetch_data_from_api(website.website_url, keyword)
+                if api_data:
+                    result['api_data'] = api_data
                 else:
-                    # If not JSON, attempt scraping
+                    # If the API data is not available or relevant, fall back to web scraping
                     scraped_data = scrape_website_content(
-                        website.website_url, keyword)  # Pass keyword to the function
+                        website.website_url, keyword)
                     if scraped_data:
                         result['scraped_data'] = scraped_data
 
@@ -166,6 +155,34 @@ def search_websites(request):
         return Response({'search_results': search_results})
 
     return Response({'error': 'Invalid request method'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+# ...
+
+
+def fetch_data_from_api(api_url, keyword):
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+
+        # Check if the response content is in JSON format
+        if 'application/json' in response.headers.get('Content-Type'):
+            api_data = response.json()
+
+            # Filter the API data based on the keyword
+            filtered_data = []
+            for entry in api_data:
+                if keyword.lower() in json.dumps(entry).lower():
+                    filtered_data.append(entry)
+
+            if filtered_data:
+                return filtered_data
+
+    except requests.exceptions.RequestException:
+        pass  # Handle API request errors as needed
+    except Exception as e:
+        pass  # Handle other API-related errors as needed
+
+    return None  # API data not available or not relevant
 
 
 def scrape_website_content(website_url, keyword):
